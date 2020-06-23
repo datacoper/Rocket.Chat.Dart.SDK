@@ -3,15 +3,26 @@ part of rest;
 abstract class _ClientUsersMixin implements _ClientWrapper {
   Future<void> login(UserCredentials credentials) {
     Completer<void> completer = Completer();
+
+    var body = "";
+
+    if (credentials.token != null && credentials != '') {
+      body = json.encode(<String, String>{
+        'resume': credentials.token,
+      });
+    }else {
+      body = json.encode(<String, String>{
+        'user': credentials.name,
+        'password': credentials.password,
+      });
+    }
+
     http
         .post('${_getUrl()}/login',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: json.encode(<String, String>{
-              'user': credentials.name,
-              'password': credentials.password,
-            }))
+            body: body)
         .then((response) {
       _hackResponseHeader(response);
       final data = json.decode(response.body)['data'];
