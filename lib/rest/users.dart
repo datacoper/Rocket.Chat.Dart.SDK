@@ -60,4 +60,34 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
     }).catchError((error) => completer.completeError(error));
     return completer.future;
   }
+
+  // removePushToken remove a stores a push token
+  Future<bool> removePushToken(String token) {
+    Completer<bool> completer = Completer();
+
+    http.Request rq = http.Request('DELETE', Uri.parse('${_getUrl()}/push.token'))
+      ..headers.addAll({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-User-Id': _auth._id,
+        'X-Auth-Token': _auth._token,
+      });
+    rq.bodyFields = {
+      'token': token,
+    };
+
+    http.Client().send(rq).then((result) {
+      http.Response.fromStream(result).then((response) {
+        _hackResponseHeader(response);
+        final data = json.decode(response.body)['success'];
+        completer.complete(data);
+      }).catchError((error) {
+        completer.completeError(error);
+      });
+    }).catchError((error) {
+      completer.completeError(error);
+    });
+
+
+    return completer.future;
+  }
 }
