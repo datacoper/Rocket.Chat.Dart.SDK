@@ -67,10 +67,10 @@ class Client extends Object
 
   void close() => this._ddp.close();
 
-  void addStatusListener(_StatusListener listener) =>
+  addStatusListener(_StatusListener listener) =>
       this._getDdpClient().addStatusListener(listener);
 
-  void removeStatusListener(_StatusListener listener) =>
+  removeStatusListener(_StatusListener listener) =>
       this._getDdpClient().removeStatusListener(listener);
 }
 
