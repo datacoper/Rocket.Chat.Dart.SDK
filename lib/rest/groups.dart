@@ -26,7 +26,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     if (unreads != null) {
       query.write('&unreads=$unreads');
     }
-    http.get('${_getUrl()}/groups.history?${query.toString()}', headers: {
+    http.get(Uri.parse('${_getUrl()}/groups.history?${query.toString()}'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
@@ -48,7 +48,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   }) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.create',
+        .post(Uri.parse('${_getUrl()}/groups.create'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -69,7 +69,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<void> groupsSetTopic(String roomId, String topic) {
     Completer<void> completer = Completer();
     http
-        .post('${_getUrl()}/groups.setTopic',
+        .post(Uri.parse('${_getUrl()}/groups.setTopic'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -88,7 +88,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<Channel> groupsInvite(String roomId, String userId) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.invite',
+        .post(Uri.parse('${_getUrl()}/groups.invite'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -108,7 +108,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<Channel> groupsKick(String roomId, String userId) {
     Completer<Channel> completer = Completer();
     http
-        .post('${_getUrl()}/groups.kick',
+        .post(Uri.parse('${_getUrl()}/groups.kick'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -128,7 +128,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
   Future<void> groupsLeave(String roomId) {
     Completer<void> completer = Completer();
     http
-        .post('${_getUrl()}/groups.leave',
+        .post(Uri.parse('${_getUrl()}/groups.leave'),
             headers: {
               'X-User-Id': _auth._id,
               'X-Auth-Token': _auth._token,
@@ -157,7 +157,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
     if (count != null) {
       query.write('&count=$count');
     }
-    http.get('${_getUrl()}/groups.members?${query.toString()}', headers: {
+    http.get(Uri.parse('${_getUrl()}/groups.members?${query.toString()}'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
@@ -173,7 +173,7 @@ abstract class _ClientGroupsMixin implements _ClientWrapper {
 
   Future<List<Channel>> listGroups() {
     Completer<List<Channel>> completer = Completer();
-    http.get('${_getUrl()}/groups.list', headers: {
+    http.get(Uri.parse('${_getUrl()}/groups.list'), headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {

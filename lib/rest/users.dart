@@ -18,7 +18,7 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
     }
 
     http
-        .post('${_getUrl()}/login',
+        .post(Uri.parse('${_getUrl()}/login'),
             headers: {
               'Content-Type': 'application/json',
             },
@@ -41,7 +41,7 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
       String id, String token, String type, String appName) {
     Completer<String> completer = Completer();
     http
-        .post('${_getUrl()}/push.token',
+        .post(Uri.parse('${_getUrl()}/push.token'),
             headers: {
               'Content-Type': 'application/json',
               'X-User-Id': _auth._id,
