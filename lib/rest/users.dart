@@ -10,7 +10,7 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
       body = json.encode(<String, String>{
         'resume': credentials.token,
       });
-    }else {
+    } else {
       body = json.encode(<String, String>{
         'user': credentials.name,
         'password': credentials.password,
@@ -18,7 +18,7 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
     }
 
     http
-        .post(Uri.parse('${_getUrl()}/login'),
+        .post('${_getUrl()}/login',
             headers: {
               'Content-Type': 'application/json',
             },
@@ -37,11 +37,10 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
   }
 
   // savePushToken stores a push token and returns its id
-  Future<String> savePushToken(
-      String id, String token, String type, String appName) {
+  Future<String> savePushToken(String id, String token, String type, String appName) {
     Completer<String> completer = Completer();
     http
-        .post(Uri.parse('${_getUrl()}/push.token'),
+        .post('${_getUrl()}/push.token',
             headers: {
               'Content-Type': 'application/json',
               'X-User-Id': _auth._id,
@@ -86,7 +85,6 @@ abstract class _ClientUsersMixin implements _ClientWrapper {
     }).catchError((error) {
       completer.completeError(error);
     });
-
 
     return completer.future;
   }

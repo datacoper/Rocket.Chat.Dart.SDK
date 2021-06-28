@@ -3,7 +3,7 @@ part of rest;
 abstract class _ClientRoomsMixin implements _ClientWrapper {
   Future<List<Channel>> getRooms() {
     Completer<List<Channel>> completer = Completer();
-    http.get(Uri.parse('${_getUrl()}/rooms.get'), headers: {
+    http.get('${_getUrl()}/rooms.get', headers: {
       'X-User-Id': _auth._id,
       'X-Auth-Token': _auth._token,
     }).then((response) {
